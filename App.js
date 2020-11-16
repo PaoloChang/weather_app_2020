@@ -5,8 +5,9 @@ import Loading from './Loading';
 import Weather from './Weather';
 import * as Location from 'expo-location';
 import axios from 'axios';
-import { API_KEY } from "@env"
+import config from './config';
 
+const API_KEY = config.API_KEY;
 
 export default class App extends React.Component {
 
@@ -25,7 +26,6 @@ export default class App extends React.Component {
       
       // Send to API and get weather
       this.getWeather(latitude, longitude);
-      // this.getForcast(latitude, longitude);
 
     } catch (error) {
       Alert.alert("Error", "Can't find the location");
@@ -55,20 +55,6 @@ export default class App extends React.Component {
       isLoading: false
     });
   }
-
-  // getForcast = async (latitude, longitude) => {
-  //   const {
-  //     data: {
-  //       daily
-  //     }
-  //   } = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,minutely,hourly&appid=${API_KEY}&units=metric`);
-  //   console.log("getForcast()@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-  //   console.log(daily)
-  //   this.setState({
-  //     dailyObj: daily,
-  //     isLoading: false
-  //   });
-  // }
 
   render() {
     const { isLoading, condition, main, name, dailyObj } = this.state;
